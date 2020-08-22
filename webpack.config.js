@@ -8,8 +8,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {
   CleanWebpackPlugin
 } = require('clean-webpack-plugin');
+const webpackMerge = require('webpack-merge').default;
+const globalConfig = require('global-config');
 
-module.exports = {
+const externalsArr = globalConfig.webpackExternals.map(itemConfig => itemConfig.options);
+const externals = Object.assign({}, ...externalsArr);
+
+module.exports = webpackMerge({
   mode: 'development',
   entry: './src/index.tsx',
   output: {
@@ -39,12 +44,28 @@ module.exports = {
   },
   devServer: {
     contentBase: './dist',
+    proxy: {
+      '/cdn': {
+        target: 'http://localhost:8081',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/cdn': '',
+        }
+      },
+      '/global-config/lib': {
+        target: 'http://localhost:8081',
+        changeOrigin: true,
+      }
+    }
   },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Output Management',
-      template: './public/index.html'
+      template: './public/index.html',
+      inject: false,
     }),
   ],
-}
+}, {
+  externals
+});
