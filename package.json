@@ -6,8 +6,9 @@
   "author": "iWuzhi <2461358597@qq.com>",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.config.js",
-    "build": "webpack --config webpack.config.js"
+    "start": "NODE_ENV=development webpack-dev-server --config ./config/webpack/dev.js",
+    "build": "NODE_ENV=production webpack --config ./config/webpack/prod.js",
+    "build:local": "yarn build && rm -rf ../mock-cdn-server/your-app-name && mkdir ../mock-cdn-server/your-app-name && cp -r ./dist/* ../mock-cdn-server/your-app-name"
   },
   "devDependencies": {
     "@types/less": "^3.0.1",
@@ -26,7 +27,8 @@
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
-    "webpack-merge": "^5.1.2"
+    "webpack-merge": "^5.1.2",
+    "cssnano": "^4.1.10"
   },
   "dependencies": {
     "global-config": "git+ssh://git@github.com:micro-react/global-config.git",

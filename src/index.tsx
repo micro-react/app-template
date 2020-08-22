@@ -1,11 +1,9 @@
 /**
  * author iWuzhi
- * date 2020-08-22 10:58:08
+ * date 2020-08-22 19:32:18
  */
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-
+//  TODO: 被加载的话 这里应该注册
 import App from './app/index';
 
-ReactDOM.render(<App />, document.querySelector('#root'));
+export default App;
