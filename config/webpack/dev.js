@@ -10,6 +10,17 @@ const {
   CleanWebpackPlugin
 } = require('clean-webpack-plugin');
 
+const {
+  webpackExternals,
+  globalCSS,
+} = require('global-config');
+
+const env = require('../env')[process.env.NODE_ENV];
+
+const externalScriptTags = webpackExternals.map(external => `<script src='${env.cdn + external.cdn}'></script>`);
+const globalCSSTags = globalCSS.map(cssHref => `<link href='${env.cdn + cssHref}' rel="stylesheet" type="text/css"></link>`);
+const headTags = externalScriptTags.concat(globalCSSTags).join('\n');
+
 const base = require('./base');
 
 module.exports = webpackMerge(base, {
@@ -36,7 +47,8 @@ module.exports = webpackMerge(base, {
     new HtmlWebpackPlugin({
       title: 'Hei, Welcome to Remico',
       template: './public/index.html',
-      inject: false,
+      inject: true,
+      headTags
     }),
   ],
 });

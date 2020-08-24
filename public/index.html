@@ -3,18 +3,10 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
+		<%= htmlWebpackPlugin.options.headTags %>
+		<title><%= htmlWebpackPlugin.options.title %></title>
 	</head>
 	<body>
 		<div id="root"></div>
-		<!-- ----------------------------------------------------------------------- -->
-		<!--                                  init                                   -->
-		<!-- ----------------------------------------------------------------------- -->
-		<script type="module">
-			import { webpackExternals } from '/cdn/global-config/index.js';
-			Promise.all(webpackExternals.map(external => import(external.cdn))).then(() => {
-				import("./main.js"); // TODO: Hash
-			});
-		</script>
 	</body>
 </html>

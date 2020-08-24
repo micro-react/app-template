@@ -8,6 +8,7 @@
   "scripts": {
     "start": "NODE_ENV=development webpack-dev-server --config ./config/webpack/dev.js",
     "build": "NODE_ENV=production webpack --config ./config/webpack/prod.js",
+    "build:dev": "NODE_ENV=development webpack --config ./config/webpack/dev.js",
     "build:local": "yarn build && rm -rf ../mock-cdn-server/your-app-name && mkdir ../mock-cdn-server/your-app-name && cp -r ./dist/* ../mock-cdn-server/your-app-name"
   },
   "devDependencies": {
@@ -16,6 +17,7 @@
     "@types/react-dom": "^16.9.8",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^4.2.1",
+    "cssnano": "^4.1.10",
     "html-webpack-plugin": "^4.3.0",
     "less-loader": "^6.2.0",
     "postcss-import": "^12.0.1",
@@ -27,8 +29,7 @@
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
-    "webpack-merge": "^5.1.2",
-    "cssnano": "^4.1.10"
+    "webpack-merge": "^5.1.2"
   },
   "dependencies": {
     "global-config": "git+ssh://git@github.com:micro-react/global-config.git",
